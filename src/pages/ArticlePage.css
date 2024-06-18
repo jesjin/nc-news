@@ -1,0 +1,27 @@
+.article-page {
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.article-page h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: darkblue
+}
+
+.article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.9em;
+    color: #666;
+    color: maroon
+}
+
+.article-page p {
+    line-height: 1.6;
+    color: black
+}
