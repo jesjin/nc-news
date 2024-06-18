@@ -1,0 +1,21 @@
+.article-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: small;
+    color: darkblue;
+  }
+  
+  .article-card h2 {
+    margin-top: 0;
+  }
+  
+  .article-card .article-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
