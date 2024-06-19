@@ -20,6 +20,7 @@ const ArticlePage = () => {
       .get(`https://jesjin-nc-news.onrender.com/api/articles/${article_id}`)
       .then((response) => {
         setArticle(response.data.article);
+        setVotes(response.data.article.votes);
         setLoading(false);
       })
       .catch((error) => {
@@ -54,7 +55,7 @@ const ArticlePage = () => {
         <span>
           Published: {new Date(article.created_at).toLocaleDateString()}
         </span>
-        <span>Votes: {article.votes}</span>
+        <span>Votes: {votes}</span>
         <span>Comments: {article.comment_count}</span>
       </div>
       <div className="vote-buttons">
