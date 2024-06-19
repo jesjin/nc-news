@@ -11,3 +11,5 @@ export const fetchArticles = async () => {
     throw error;
   }
 };
+
+export default API_URL;
