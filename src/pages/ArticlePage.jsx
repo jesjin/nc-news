@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import CommentList from "../components/Comments/CommentList";
+import CommentForm from "../components/Comments/CommentForm";
 import API_URL from "../api";
 import "./ArticlePage.css";
 
@@ -13,6 +14,7 @@ const ArticlePage = () => {
   const [error, setError] = useState(null);
   const [votes, setVotes] = useState(0);
   const [voteError, setVoteError] = useState(null);
+  const [comments, setComments] = useState([]);
   
 
   useEffect(() => {
@@ -38,6 +40,10 @@ const ArticlePage = () => {
         setVoteError('Error updating votes');
       });
   };
+
+  const handleCommentAdded = (newComment) => {
+    setComments([newComment, ...comments]);
+  }
 
   if (loading) {
     return <p>Loading...</p>;
@@ -65,6 +71,7 @@ const ArticlePage = () => {
       {voteError && <p className="error">{voteError}</p>}
       <p>{article.body}</p>
       <h2>Comments</h2>
+      <CommentForm articleId={article_id} onCommentAdded={{handleCommentAdded}} />
       <CommentList articleId={article_id} />
     </div>
   );
