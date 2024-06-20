@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { fetchComments } from "../../api";
 import CommentCard from "./CommentCard";
 import "./CommentList.css";
 
@@ -10,8 +10,7 @@ const CommentList = ({ articleId, newComment }) => {
   const [deleteMessage, setDeleteMessage] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`https://jesjin-nc-news.onrender.com/api/articles/${articleId}/comments`)
+    fetchComments(articleId)
       .then((response) => {
         setComments(response.data.comments);
         setLoading(false);
