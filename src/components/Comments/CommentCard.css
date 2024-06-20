@@ -17,3 +17,26 @@
   .comment-author {
     font-weight: bold;
   }
+
+  .delete-button {
+    background-color: #e09595 ;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 4px;
+    cursor: pointer;
+    font-size: small;
+  }
+  
+  .comment-card:hover .delete-button {
+    display: inline-block;
+  }
+
+  .delete-button:disabled {
+    background-color: #cccccc;
+    cursor:not-allowed;
+  }
+
+  .delete-button:hover:enabled {
+    background-color: #cc0000;
+  }
