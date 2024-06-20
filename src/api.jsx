@@ -1,15 +1,23 @@
 import axios from 'axios';
 
-const API_URL = 'https://jesjin-nc-news.onrender.com/api';
+const api = axios.create({
+  baseURL: 'https://jesjin-nc-news.onrender.com/api',
+});
 
-export const fetchArticles = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/articles`);
-    return response.data.articles;
-  } catch (error) {
-    console.error('Error fetching articles:', error);
-    throw error;
-  }
+export const fetchArticle = (articleId) => {
+  return api.get(`/articles/${articleId}`);
 };
 
-export default API_URL;
+export const fetchComments = (articleId) => {
+  return api.get(`/articles/${articleId}/comments`);
+};
+
+export const addComment = (articleId, comment) => {
+  return api.post(`/articles/${articleId}/comments`, comment);
+};
+
+export const voteArticle = (articleId, change) => {
+  return api.patch(`/articles/${articleId}`, { inc_votes: change });
+};
+
+export default api;

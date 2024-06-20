@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { fetchArticle, voteArticle } from "../api"; 
 import CommentList from "../components/Comments/CommentList";
 import CommentForm from "../components/Comments/CommentForm";
-import API_URL from "../api";
 import "./ArticlePage.css";
 
 const ArticlePage = () => {
@@ -16,8 +15,7 @@ const ArticlePage = () => {
   const [newComment, setNewComment] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`https://jesjin-nc-news.onrender.com/api/articles/${article_id}`)
+    fetchArticle(article_id)
       .then((response) => {
         setArticle(response.data.article);
         setVotes(response.data.article.votes);
@@ -32,7 +30,7 @@ const ArticlePage = () => {
   const handleVote = (change) => {
     setVotes(votes + change);
     setVoteError(null);
-    axios.patch(`https://jesjin-nc-news.onrender.com/api/articles/${article_id}`, { inc_votes: change })
+    voteArticle(article_id, change)
       .catch(err => {
         setVotes(votes - change);
         setVoteError('Error updating votes');

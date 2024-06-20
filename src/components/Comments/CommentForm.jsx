@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { addComment } from "../../api";
 import "./CommentForm.css";
 
 const CommentForm = ({ articleId, onCommentAdded }) => {
@@ -17,14 +17,12 @@ const CommentForm = ({ articleId, onCommentAdded }) => {
     setSubmitting(true);
     setError(null);
 
-    axios
-      .post(
-        `https://jesjin-nc-news.onrender.com/api/articles/${articleId}/comments`,
-        {
-          username: "jessjelly",
-          body: commentText,
-        }
-      )
+    const comment = {
+      username: "jessjelly",
+      body: commentText,
+    };
+    
+    addComment(articleId, comment)
       .then((response) => {
         setCommentText("");
         setSubmitting(false);
