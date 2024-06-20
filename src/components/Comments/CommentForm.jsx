@@ -41,7 +41,7 @@ const CommentForm = ({ articleId, onCommentAdded }) => {
       <textarea
         value={commentText}
         onChange={(e) => setCommentText(e.target.value)}
-        placeholder="Write your comment here"
+        placeholder="Write your comment here..."
         required
       />
       {error && <p className="error">{error}</p>}
