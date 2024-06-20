@@ -6,7 +6,6 @@ import CommentForm from "../components/Comments/CommentForm";
 import API_URL from "../api";
 import "./ArticlePage.css";
 
-
 const ArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState(null);
@@ -14,8 +13,7 @@ const ArticlePage = () => {
   const [error, setError] = useState(null);
   const [votes, setVotes] = useState(0);
   const [voteError, setVoteError] = useState(null);
-  const [comments, setComments] = useState([]);
-  
+  const [newComment, setNewComment] = useState(null);
 
   useEffect(() => {
     axios
@@ -42,7 +40,7 @@ const ArticlePage = () => {
   };
 
   const handleCommentAdded = (newComment) => {
-    setComments([newComment, ...comments]);
+    setNewComment(newComment);
   }
 
   if (loading) {
@@ -71,8 +69,8 @@ const ArticlePage = () => {
       {voteError && <p className="error">{voteError}</p>}
       <p>{article.body}</p>
       <h2>Comments</h2>
-      <CommentForm articleId={article_id} onCommentAdded={{handleCommentAdded}} />
-      <CommentList articleId={article_id} />
+      <CommentForm articleId={article_id} onCommentAdded={handleCommentAdded} />
+      <CommentList articleId={article_id} newComment={newComment} />
     </div>
   );
 };
