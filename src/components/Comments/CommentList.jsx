@@ -3,35 +3,35 @@ import axios from "axios";
 import CommentCard from "./CommentCard";
 import "./CommentList.css";
 
-const CommentList = ({ articleId, initialComments = [] }) => {
-  const [loading, setLoading] = useState(initialComments.length);
+const CommentList = ({ articleId, newComment }) => {
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [comments, setComments] = useState(initialComments);
-  const [deleteMessage, SetDeleteMessage] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [deleteMessage, setDeleteMessage] = useState(null);
 
   useEffect(() => {
-    if (!comments.length) {
-      axios
-        .get(
-          `https://jesjin-nc-news.onrender.com/api/articles/${articleId}/comments`
-        )
-        .then((response) => {
-          setComments(response.data.comments);
-          setLoading(false);
-        })
-        .catch((error) => {
-          setError("Error fetching comments");
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
-  }, [articleId, comments]);
+    axios
+      .get(`https://jesjin-nc-news.onrender.com/api/articles/${articleId}/comments`)
+      .then((response) => {
+        setComments(response.data.comments);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError("Error fetching comments");
+        setLoading(false);
+      });
+  }, [articleId]);
 
-  const handleDelte = (commentId) => {
+  useEffect(() => {
+    if (newComment) {
+      setComments(prevComments => [newComment, ...prevComments]);
+    }
+  }, [newComment]);
+
+  const handleDelete = (commentId) => {
     setComments(comments.filter((comment) => comment.comment_id !== commentId));
-    SetDeleteMessage('Comment successfully deleted.');
-    setTimeout(() => SetDeleteMessage(null), 2000);
+    setDeleteMessage('Comment successfully deleted.');
+    setTimeout(() => setDeleteMessage(null), 2000);
   };
 
   if (loading) {
@@ -49,7 +49,7 @@ const CommentList = ({ articleId, initialComments = [] }) => {
         <CommentCard
           key={comment.comment_id}
           comment={comment}
-          onDelete={handleDelte}
+          onDelete={handleDelete}
         />
       ))}
     </div>
