@@ -1,0 +1,26 @@
+.comment-form {
+    gap: 10px;
+    display: flex;
+}
+
+.comment-form textarea {
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    background-color: #ddd;
+    width: 100%;
+    resize: vertical;
+    color:black;
+}
+
+.comment-form button {
+    font-weight: bold;
+}
+
+.comment-form button:hover {
+    background-color: maroon;
+  }
+
+.comment-form .error {
+    color: red;
+    font-weight: bold;
+  }
