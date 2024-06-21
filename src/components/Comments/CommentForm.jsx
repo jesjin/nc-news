@@ -20,8 +20,7 @@ const CommentForm = ({ articleId, onCommentAdded }) => {
     const comment = {
       username: "jessjelly",
       body: commentText,
-    };
-    
+    }
     addComment(articleId, comment)
       .then((response) => {
         setCommentText("");

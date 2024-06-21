@@ -20,4 +20,8 @@ export const voteArticle = (articleId, change) => {
   return api.patch(`/articles/${articleId}`, { inc_votes: change });
 };
 
+export const fetchArticles = (params) => {
+  return api.get('/articles', { params });
+};
+
 export default api;
