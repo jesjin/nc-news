@@ -7,3 +7,14 @@
     flex-wrap: wrap;
     justify-content: space-around;
   }
+
+  .sort-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .sort-controls label{
+    display: flex;
+    flex-direction: column;
+  }

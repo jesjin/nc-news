@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchArticle, voteArticle } from "../api"; 
+import { fetchArticle, voteArticle } from "../api";
 import CommentList from "../components/Comments/CommentList";
 import CommentForm from "../components/Comments/CommentForm";
 import "./ArticlePage.css";
@@ -30,16 +30,15 @@ const ArticlePage = () => {
   const handleVote = (change) => {
     setVotes(votes + change);
     setVoteError(null);
-    voteArticle(article_id, change)
-      .catch(err => {
-        setVotes(votes - change);
-        setVoteError('Error updating votes');
-      });
+    voteArticle(article_id, change).catch((err) => {
+      setVotes(votes - change);
+      setVoteError("Error updating votes");
+    });
   };
 
   const handleCommentAdded = (newComment) => {
     setNewComment(newComment);
-  }
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -54,9 +53,7 @@ const ArticlePage = () => {
       <h1>{article.title}</h1>
       <div className="article-meta">
         <span>Author: {article.author}</span>
-        <span>
-          Published: {new Date(article.created_at).toLocaleDateString()}
-        </span>
+        <span>Published: {new Date(article.created_at).toLocaleDateString()}</span>
         <span>Votes: {votes}</span>
         <span>Comments: {article.comment_count}</span>
       </div>
